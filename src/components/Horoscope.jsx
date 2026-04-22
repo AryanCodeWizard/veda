@@ -11,10 +11,9 @@ const zodiacs = [
 const Horoscope = () => {
   const [selected, setSelected] = useState('aries');
   const [horoscope, setHoroscope] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const fetchHoroscope = async (sign) => {
-    setLoading(true);
     try {
       const res = await fetch(`https://aztro.sameerkumar.website/?sign=${sign}&day=today`, {
         method: 'POST'
@@ -45,7 +44,10 @@ const Horoscope = () => {
           {zodiacs.map((sign) => (
             <button
               key={sign}
-              onClick={() => setSelected(sign)}
+              onClick={() => {
+                setLoading(true);
+                setSelected(sign);
+              }}
               className={`px-4 py-2 rounded-full capitalize transition ${
                 selected === sign
                   ? 'bg-teal-700 text-white shadow-md'
