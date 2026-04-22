@@ -12,6 +12,7 @@ const Horoscope = () => {
   const [selected, setSelected] = useState('aries');
   const [horoscope, setHoroscope] = useState(null);
   const [loading, setLoading] = useState(true);
+  const MotionDiv = motion.div;
 
   const fetchHoroscope = async (sign) => {
     try {
@@ -28,7 +29,11 @@ const Horoscope = () => {
   };
 
   useEffect(() => {
-    fetchHoroscope(selected);
+    const timer = setTimeout(() => {
+      fetchHoroscope(selected);
+    }, 0);
+
+    return () => clearTimeout(timer);
   }, [selected]);
 
   return (
@@ -62,7 +67,7 @@ const Horoscope = () => {
         {loading ? (
           <div className="flex justify-center py-12"><Loader className="animate-spin text-teal-700" size={40} /></div>
         ) : horoscope && (
-          <motion.div
+          <MotionDiv
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             className="rounded-3xl border border-teal-100 bg-white/95 p-6 shadow-xl shadow-teal-950/5 md:p-8"
@@ -78,7 +83,7 @@ const Horoscope = () => {
               <div><span className="font-bold">Lucky Number:</span> {horoscope.lucky_number}</div>
               <div><span className="font-bold">Compatible Sign:</span> {horoscope.compatibility}</div>
             </div>
-          </motion.div>
+          </MotionDiv>
         )}
       </div>
     </section>

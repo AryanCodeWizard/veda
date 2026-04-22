@@ -12,6 +12,8 @@ const services = [
 ];
 
 const Services = () => {
+  const MotionDiv = motion.div;
+
   return (
     <section id="services" className="py-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -27,7 +29,7 @@ const Services = () => {
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {services.map((service, idx) => (
-            <motion.div
+            <MotionDiv
               key={idx}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -40,7 +42,7 @@ const Services = () => {
               </div>
               <h3 className="mb-2 text-xl font-bold text-slate-900">{service.name}</h3>
               <p className="text-slate-600">{service.desc}</p>
-            </motion.div>
+            </MotionDiv>
           ))}
         </div>
       </div>
